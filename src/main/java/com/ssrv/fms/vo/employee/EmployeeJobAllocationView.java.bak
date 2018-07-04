@@ -1,0 +1,88 @@
+package com.ssrv.fms.vo.employee;
+
+import java.sql.Date;
+
+import com.ssrv.fms.model.job.Joballocations;
+
+public class EmployeeJobAllocationView 
+{
+	
+	private String employeeCode;
+	
+	private String employeeName;
+	
+	private String organization;
+	
+	private String branch;
+	
+	private String supervisor;
+	
+	private String shift;
+	
+	private Date startDate;
+
+	public EmployeeJobAllocationView(Joballocations jobAllocation) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getEmployeeCode() {
+		return employeeCode;
+	}
+
+	public void setEmployeeCode(String employeeCode) {
+		this.employeeCode = employeeCode;
+	}
+
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+
+	public String getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(String organization) {
+		this.organization = organization;
+	}
+
+	public String getBranch() {
+		return branch;
+	}
+
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+
+	public String getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(String supervisor) {
+		this.supervisor = supervisor;
+	}
+
+	public String getShift() {
+		return shift;
+	}
+
+	public void setShift(String shift) {
+		this.shift = shift;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	
+	
+	
+	
+
+}

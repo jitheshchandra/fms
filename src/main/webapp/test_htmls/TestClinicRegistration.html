@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form method="post" id="myform" action="http://localhost:8080/dicdocv1/registerClinic">
+		
+		<input type="hidden" id="json" name="json"/>
+		clinic registration: <input type="button" value="submit" onclick="submitform();"/>
+	</form>
+
+</body>
+
+<script>
+	function submitform() {
+	    //var url = '/users/' + $('#user_id').val();
+	    //$('#myform').attr('action', url);
+	    var data = JSON.stringify(
+	    		{
+	    			user:
+	    			{'userId':'lohithatn', 'password':'lohitha', 
+	    				
+	    			  clinic:{'clinicName':'columbia asia'}
+	    		
+	    			}}
+	    		);
+	    document.getElementById('json').value = data;
+	    //$('<input type="hidden" name="json"/>').val(data).appendTo('#myform');
+	    document.forms[0].submit();
+	}
+</script>
+</html>

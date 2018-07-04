@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+
+
+    <mvc:annotation-driven/>
+
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+	    <property name="securityManager" ref="securityManager"/>
+	    
+	    <property name="loginUrl" value="/login"/>
+	    <property name="successUrl" value="/"></property>
+	    <!-- override these for application-specific URLs if you like:
+	    <property name="successUrl" value="/home.jsp"/>
+	    <property name="unauthorizedUrl" value="/unauthorized.jsp"/> -->
+	    <!-- The 'filters' property is not necessary since any declared javax.servlet.Filter bean  -->
+	    <!-- defined will be automatically acquired and available via its beanName in chain        -->
+	    <!-- definitions, but you can perform instance overrides or name aliases here if you like: -->
+	    <!-- <property name="filters">
+	        <util:map>
+	            <entry key="anAlias" value-ref="someFilter"/>
+	        </util:map>
+	    </property> -->
+	    <property name="filterChainDefinitions">
+	        <value>
+	            # some example chain definitions:
+	            /clinic/** = anon
+	            /admin/** = authc, roles[admin]
+	            /docs/** = authc, perms[document:read]
+	            /doctor/** = anon
+	            / = anon
+	            # more URL-to-FilterChain definitions here
+	        </value>
+	    </property>
+	</bean>
+
+
+
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+	    <!-- Single realm app.  If you have multiple realms, use the 'realms' property instead. -->
+	    <property name="realm" ref="fmsRealm"/>
+	    <!-- By default the servlet container sessions will be used.  Uncomment this line
+	         to use shiro's native sessions (see the JavaDoc for more): -->
+	    <!-- <property name="sessionMode" value="native"/> -->
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+	<!-- Define the Shiro Realm implementation you want to use to connect to your back-end -->
+	<!-- security datasource: -->
+	
+	<!-- 
+	<bean id="fmsRealm" class="org.apache.shiro.realm.text.IniRealm">
+  		<property name="resourcePath" value="C:/Rajesh/Misc Projects/Lake Systems/fms/code/V2/fms/fms/target/classes/shiro.ini" />
+	</bean>
+	 -->
+	
+	<bean id="fmsRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
+		<property name="dataSource" ref="realmDataSource"></property>
+		<property name="authenticationQuery" value="SELECT PASSWORD FROM USER WHERE USER_ID = ?"></property>
+		<property name="userRolesQuery" value="SELECT ROLE_ID FROM USER WHERE USER_ID = ?"></property>
+	</bean>
+	
+	<bean id="realmDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://115.119.249.243:3306/tspm"></property>
+		<property name="username" value="CBAY"></property>
+		<property name="password" value="CBAY"></property>
+	</bean>
+
+   
+
+
+</beans>

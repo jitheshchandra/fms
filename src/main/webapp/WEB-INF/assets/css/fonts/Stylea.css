@@ -1,0 +1,15 @@
+@CHARSET "ISO-8859-1";
+
+	.container1 {
+    margin-left: auto;
+    margin-right: auto;
+    height:600px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #EBE9E4;
+}
+
+.myLabel {
+	color:black;
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}

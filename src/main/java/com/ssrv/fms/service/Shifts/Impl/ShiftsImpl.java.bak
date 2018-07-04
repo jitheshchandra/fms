@@ -1,0 +1,89 @@
+package com.ssrv.fms.service.Shifts.Impl;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ssrv.fms.model.branch.Branch;
+import com.ssrv.fms.model.organization.Organization;
+import com.ssrv.fms.model.shift.Shifts;
+import com.ssrv.fms.service.Shifts.Intf.ShiftIntf;
+import com.ssrv.fms.vo.Shifts.ShiftForm;
+
+@Lazy
+@Service
+public class ShiftsImpl implements ShiftIntf
+	{
+		@PersistenceContext
+		private EntityManager entityManager;
+
+		// Save Shifts
+		@Transactional
+		public void SaveShift(ShiftForm form)
+			{
+				Shifts shift = new Shifts();
+				Organization org = entityManager.find(Organization.class, form.getOrganizationId());
+				shift.setOrganizationId(org);
+				Branch branch = entityManager.find(Branch.class, form.getBranchId());
+				shift.setBranchId(branch);
+				shift.setShiftName(form.getName());
+				shift.setStartTime(form.getStartTime());
+				shift.setEndTime(form.getEndTime());
+				shift.setModifiedOn(new Date());
+				entityManager.persist(shift);
+			}
+
+		// Get shifts By Using Organization Id
+		public List<Branch> getBranchByOraganizationId(long orgId)
+			{
+				try
+					{
+						@SuppressWarnings("unchecked")
+						List<Branch> Branch = entityManager.createQuery("SELECT s FROM Shifts s WHERE s.isDeleted=0 AND s.organizationId=" + orgId).getResultList();
+						return Branch;
+					}
+				catch (Exception e)
+					{
+						return null;
+					}
+			}
+
+		// Get Shifts By Using Branch Id
+		public List<Shifts> getAllShiftsByBranchId(long brId,long crId)
+			{
+				try
+					{
+						@SuppressWarnings("unchecked")
+						List<Shifts> shifts = entityManager.createQuery("SELECT S FROM Shifts S WHERE S.isDeleted=0 AND S.branchId=" + brId+"AND S.organizationId="+crId).getResultList();
+						return shifts;
+					}
+				catch (Exception e)
+					{
+						return null;
+
+					}
+			}
+
+		// Get Shifts By Shifts Id
+		public Shifts getShiftsById(long shiftsId)
+			{
+				Shifts shift = entityManager.find(Shifts.class, shiftsId);
+				return shift;
+			}
+
+		// Update Shifts
+		@Transactional
+		public void updateShift(ShiftForm form)
+			{
+				Shifts shifts = entityManager.find(Shifts.class, form.getId());
+				shifts.setShiftName(form.getName());
+				shifts.setStartTime(form.getStartTime());
+				shifts.setEndTime(form.getEndTime());
+			}
+	}

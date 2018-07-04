@@ -1,0 +1,16 @@
+package com.ssrv.fms.vo.Job;
+
+import java.util.List;
+
+public class EmployeeJobmovementForm
+	{
+		private List<EmployeeJobMovement> employees;
+		public List<EmployeeJobMovement> getEmployees()
+			{
+				return employees;
+			}
+		public void setEmployees(List<EmployeeJobMovement> employees)
+			{
+				this.employees = employees;
+			}
+	}

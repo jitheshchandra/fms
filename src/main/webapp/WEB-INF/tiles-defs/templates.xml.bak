@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<!-- Default Main Template -->
+	<definition name=".mainTemplate" template="/WEB-INF/templates/main.jsp">
+		<put-attribute name="title" value="F M S" type="string" />
+		<put-attribute name="header" value="/WEB-INF/templates/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/templates/footer.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/templates/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/templates/blank.jsp" />
+	</definition>
+
+
+	<!-- Login Index Change PassWord -->
+
+
+	<definition name="index" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
+	</definition>
+
+
+	<definition name="UnderConstruction" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/UnderConstruction.jsp" />
+	</definition>
+
+
+	<definition name="changePassword" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/changePassword.jsp" />
+	</definition>
+
+	<definition name="UserSummary" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/UsersSummary.jsp" />
+	</definition>
+
+
+	<definition name="forgotPassword" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/forgotPassword.jsp" />
+	</definition>
+
+	<definition name="ChangeBranch" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/ChangeBranch.jsp" />
+	</definition>
+
+
+
+	<!-- Employee -->
+
+	<definition name="EmployeeSummary" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EmployeeSummary.jsp" />
+	</definition>
+
+	<definition name="EmployeeDetails" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EmployeeDetails.jsp" />
+	</definition>
+
+	<definition name="EditEmployee" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EditEmployee.jsp" />
+	</definition>
+
+	<definition name="EmployeeAttendance" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/EmployeeAttendance.jsp" />
+	</definition>
+
+	<definition name="EmployeeJobAllocation" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/EmployeeJobAllocation.jsp" />
+	</definition>
+
+	<definition name="EmployeeJobMovement" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/EmployeeJobMovement.jsp" />
+	</definition>
+
+
+	<definition name="EmployeeGrooming" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EmployeeGrooming.jsp" />
+	</definition>
+
+	<definition name="AddEmergencyEmployee" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/AddNewEmployee.jsp" />
+	</definition>
+	
+	<definition name="EmployeeOverTime" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EmployeeOvertime.jsp" />
+	</definition>
+
+
+	<!-- Employee Family Relation -->
+
+	<definition name="EmployeeFamilyDetails" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/EmployeeFamilyDetails.jsp" />
+	</definition>
+
+	<definition name="AddEmployeeRelationship" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/AddEmployeeRelationship.jsp" />
+	</definition>
+
+	<definition name="EditEmployeeRelation" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/EditEmployeeRelation.jsp" />
+	</definition>
+
+	<!-- Material -->
+
+	<definition name="MaterialMaster" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/MaterialMaster.jsp" />
+	</definition>
+
+
+	<definition name="MaterialList" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/MaterialList.jsp" />
+	</definition>
+
+
+	<definition name="MaterialConsumption" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/MaterialConsumption.jsp" />
+	</definition>
+
+	<definition name="MaterialReceipt" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/MaterialReceipt.jsp" />
+	</definition>
+	
+	<definition name="ItemTypeSummary" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/ItemType.jsp" />
+	</definition>
+	
+	<definition name="EditItemType" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EditItemType.jsp" />
+	</definition>
+
+<!-- Login -->
+
+	<definition name="login" extends=".mainTemplate">
+		<put-attribute name="menu" value="/WEB-INF/templates/blank.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
+		<put-attribute name="header" value="/WEB-INF/templates/blank.jsp" />
+
+	</definition>
+
+	<!-- Shift -->
+
+	<definition name="Shifts" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/shifts.jsp" />
+	</definition>
+
+	<definition name="EditShift" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EditShift.jsp" />
+	</definition>
+
+	<definition name="ShiftSummary" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/ShiftSummary.jsp" />
+	</definition>
+
+
+	<!-- Shift Template -->
+
+	<definition name="AddShiftTemplet" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/AddShiftTemplate.jsp" />
+	</definition>
+
+	<definition name="ShiftTempletSummary" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/ShiftTempletSummary.jsp" />
+	</definition>
+
+
+
+	<!-- Organization -->
+
+
+	<definition name="orgSummary" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/OrganizationSummary.jsp" />
+	</definition>
+
+
+	<definition name="orgdetails" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/OrganizationContactDetails.jsp" />
+	</definition>
+
+	<definition name="AddOrganization" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/AddOrganization.jsp" />
+	</definition>
+
+	<definition name="editOrgContact" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/EditOrganisationContact.jsp" />
+	</definition>
+
+	<definition name="addOrgContact" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/AddOrganizationContact.jsp" />
+	</definition>
+
+
+	<!-- Branches -->
+
+	<definition name="branchsummary" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/BranchSummary.jsp" />
+	</definition>
+
+	<definition name="EditBranch" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EditBranch.jsp" />
+	</definition>
+
+
+	<definition name="BranchDetails" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/BranchDetails.jsp" />
+	</definition>
+
+
+	<definition name="AddBranchContact" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/AddBranchContact.jsp" />
+	</definition>
+
+	<definition name="EditBranchContact" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EditBranchContact.jsp" />
+	</definition>
+
+
+	<!-- Home And Error -->
+
+
+	<definition name="Home" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/Home.jsp" />
+	</definition>
+
+	<definition name="ErrorMsg" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/Error.jsp" />
+	</definition>
+
+
+	<!-- Doctor And Clinic -->
+
+	<definition name="doctor" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/doctor/doctor.jsp" />
+	</definition>
+
+	<definition name="clinicAdmin" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/clinic/clinic_admin.jsp" />
+	</definition>
+
+	<!-- Managed Entity -->
+
+	<definition name="ManagedEntity" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/ManagedEntitySummary.jsp" />
+	</definition>
+
+	<definition name="ManagedEntityGroups" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/ManagedEntityGroupSummary.jsp" />
+	</definition>
+
+	<definition name="ManagedEntityRegistry" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/ManagedEntityRegistry.jsp" />
+	</definition>
+
+	<definition name="CheckLists" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/checkLists.jsp" />
+	</definition>
+
+	<definition name="CheckListsDetails" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/CheckListDetails.jsp" />
+	</definition>
+
+
+	<!-- Country -->
+
+	<definition name="CountrySummary" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/CountrySummary.jsp" />
+	</definition>
+
+	<definition name="EditCountry" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EditCountry.jsp" />
+	</definition>
+
+	<!-- State -->
+
+	<definition name="StateList" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/StateList.jsp" />
+	</definition>
+
+	<definition name="StateListSummary" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/StateList.jsp" />
+	</definition>
+
+
+	<definition name="EditState" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EditState.jsp" />
+	</definition>
+
+	<definition name="StateCountryList" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/StateCountryList.jsp" />
+	</definition>
+
+	<definition name="AddState" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/AddState.jsp" />
+	</definition>
+
+	<!-- Designation -->
+
+	<definition name="DesignationSummary" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/DesignationSummary.jsp" />
+	</definition>
+
+
+	<definition name="EditDesignation" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EditDesignation.jsp" />
+	</definition>
+
+	<!-- Incident Register -->
+
+
+	<definition name="IncidentCategoryEntity" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/IncidentCategory.jsp" />
+	</definition>
+
+	<definition name="IncidentRegisterEntity" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/incidentRegister.jsp" />
+	</definition>
+
+	<definition name="IncidentRegisterUpdateEntity" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/incidentRegisterUpdate.jsp" />
+	</definition>
+
+	<definition name="EscalationMatrixEntity" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/escalationmatrix.jsp" />
+	</definition>
+
+
+	<!-- Relationship -->
+
+	<definition name="RelationshipSummary" extends=".mainTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/RelationshipSummary.jsp" />
+	</definition>
+
+
+	<definition name="EditRelationship" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EditRelationship.jsp" />
+	</definition>
+
+
+
+	<!-- UserType -->
+
+	<definition name="UsertypeSummary" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/UsertypeSummary.jsp" />
+	</definition>
+
+
+	<definition name="EditUsertype" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EditUsertype.jsp" />
+	</definition>
+
+	<definition name="satJSP" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/samplePage.jsp" />
+	</definition>
+	
+	<!-- Schedule -->
+	<definition name="Schedule" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/Schedule.jsp" />
+	</definition>
+	
+	<!-- User Management -->
+	<definition name="UserSummary" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/UsersSummary.jsp" />
+	</definition>
+	<definition name="AddUser" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/NewUser.jsp" />
+	</definition>
+	<definition name="EditUser" extends=".mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/jsp/EditUser.jsp" />
+	</definition>
+</tiles-definitions>

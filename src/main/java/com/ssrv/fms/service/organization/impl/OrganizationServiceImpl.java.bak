@@ -1,0 +1,212 @@
+package com.ssrv.fms.service.organization.impl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ssrv.fms.model.organization.Organization;
+import com.ssrv.fms.model.organization.OrganizationTypes;
+import com.ssrv.fms.model.organization.Organizationcontacts;
+import com.ssrv.fms.service.organization.intf.OrganizationService;
+import com.ssrv.fms.vo.organization.AddOrganization;
+import com.ssrv.fms.vo.organization.AddOrganizationForm;
+import com.ssrv.fms.vo.organization.OrganizationContactForm;
+import com.ssrv.fms.vo.organization.OrganizationSummary;
+
+@Service
+@Lazy
+public class OrganizationServiceImpl implements OrganizationService {
+	
+	@PersistenceContext 
+	private EntityManager entityManager;
+
+	@SuppressWarnings("unchecked")
+	public List<Organization> getAllOrganizations() {
+		List<Organization> orgs = (List<Organization>)entityManager.createQuery("SELECT O FROM Organization O WHERE O.isDeleted=0").getResultList();
+	    return orgs;
+	}
+
+	@Transactional
+	public void saveOrganization(AddOrganizationForm form) {
+		Organization org = new Organization();
+		
+		org.setName(form.getName());
+		org.setAddress1(form.getAddress1());
+		org.setAddress2(form.getAddress2());
+		org.setAddress3(form.getAddress3());
+		org.setIsDeleted((short) 0);
+		OrganizationTypes orgType = entityManager.find(OrganizationTypes.class, form.getOrganizationTypesId());
+		org.setOrganizationTypes(orgType);
+		org.setPinCode(form.getPinCode());
+		
+		entityManager.persist(org);
+		
+		Organizationcontacts orgContact = new Organizationcontacts();
+		
+		orgContact.setOrganizationID(org);
+		orgContact.setContactPerson(form.getContactPerson());
+		orgContact.setContactMobileNo(form.getContactMobileNo());
+		orgContact.setContactMailId(form.getContactMailId());
+
+		entityManager.persist(orgContact);
+
+	}
+
+	public Organization findOrganizationByID(int id) {
+		// TODO Auto-generated method stub
+		Organization org = entityManager.find(Organization.class, new Long(id));
+		return org;
+	}
+
+	public List<OrganizationTypes> getAllOrganizationTypes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public OrganizationTypes findOrganizationTypesByID(long id)	 {
+		OrganizationTypes orgtype = entityManager.find(OrganizationTypes.class, new Long(id));
+		return orgtype;
+	}
+
+	public List<Organizationcontacts> getAllOrganizationContacts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Organizationcontacts> getAllOrganizationContactsByOrgID(long id) {
+		// TODO Auto-generated method stub
+		List<Organizationcontacts> OrgContact = (List<Organizationcontacts>)entityManager.createQuery("SELECT C from Organization O,Organizationcontacts C where C.organizationID=O.id and O.id="+id).getResultList();
+		return OrgContact;
+	}
+	
+	
+	public Organizationcontacts getAllOrganizationContactsByID(long id) {
+		// TODO Auto-generated method stub
+		List<Organizationcontacts> Org_Contact = (List<Organizationcontacts>) entityManager.createQuery("SELECT C from Organizationcontacts C where C.id="+id).getResultList();
+		if(Org_Contact.size()>0)
+			return Org_Contact.get(0);
+		else return null;
+	}
+	
+
+	public List<Organization> getallOrgnizationNames() {
+		List<Organization> orgs = (List<Organization>)entityManager.createQuery("SELECT O.name FROM Organization O").getResultList();
+		return orgs;
+	}
+
+	public List<OrganizationSummary> getallOrganizationDetials() {
+		List<Organization> orgs = (List<Organization>)entityManager.createQuery("SELECT O FROM Organization O WHERE O.isDeleted=0").getResultList();
+		List<OrganizationSummary> orgSummary = new ArrayList<OrganizationSummary>();
+			for (Organization org : orgs) {
+				
+			List<Organizationcontacts> orgContact = (List<Organizationcontacts>)entityManager.createQuery("SELECT O FROM Organizationcontacts O WHERE organizationID="+org.getId()).getResultList();
+			OrganizationSummary oSummary = new OrganizationSummary();
+			oSummary.setOrgId(org.getId());
+			oSummary.setOrgName(org.getName());
+			oSummary.setOrgType("Service Provider");
+			oSummary.setOrgAddress(org.getAddress1());
+			oSummary.setOrgContactPerson("Jithesh ");
+			oSummary.setOrgContactNumber("9876543212");
+			orgSummary.add(oSummary);
+			
+		}
+	    //return orgs;
+		return orgSummary;
+	}
+
+	@Transactional
+	public String deleteOrganization(int id) {
+		long org_id = (long)id;
+		
+		 Organization org=(Organization)entityManager.find(Organization.class,org_id);  
+         if(org!=null)  
+         {  
+        	org.setIsDeleted((short) 1);
+             entityManager.merge(org);
+             //entityManager.flush();
+             return "entity updated successfully";  
+            //Note manage.merge method is not called. But Product will be synchronised with the DB  
+         }  
+          else  
+              return "Entity does not exist"; 
+		}
+
+	
+	@Transactional
+	public void updateOrganization(Organization u_org) {
+		Organization org=(Organization)entityManager.find(Organization.class,u_org.getId());
+		org.setAddress1(u_org.getAddress1());
+		org.setAddress2(u_org.getAddress2());
+		org.setAddress3(u_org.getAddress3());
+		org.setName(u_org.getName());
+		org.setModifiedOn(new Date());
+	}
+
+	
+	@Transactional
+	public void updateOrganizationContact(OrganizationContactForm orgContactForm) {
+		// TODO Auto-generated method stub
+		Organizationcontacts orgc = (Organizationcontacts)entityManager.find(Organizationcontacts.class, orgContactForm.getContactId());
+		
+		if(orgc!=null)
+		{
+			orgc.setContactMailId(orgContactForm.getContactMailId());
+			orgc.setContactMobileNo(orgContactForm.getContactMobileNo());
+			orgc.setContactPerson(orgContactForm.getContactPerson());
+		//	orgc.setOrganizationID(orgContact.getOrganizationID());
+		}
+		
+	}
+
+	
+	@Transactional
+	public void addNewOrganizationContact(OrganizationContactForm orgContactForm) {
+		// TODO Auto-generated method stub
+			
+		Organizationcontacts orgContact = new Organizationcontacts();
+		
+		orgContact.setContactMailId(orgContactForm.getContactMailId());
+		orgContact.setContactMobileNo(orgContactForm.getContactMobileNo());
+		orgContact.setContactPerson(orgContactForm.getContactPerson());
+		Organization org = entityManager.find(Organization.class, orgContactForm.getOrgId());
+		orgContact.setOrganizationID(org);
+			
+		entityManager.persist(orgContact);
+		
+	}
+
+	public List<Organization> getAllServiceConsumerOrganizations() {
+		List<Organization> orgs = (List<Organization>)entityManager.createQuery("SELECT O FROM Organization O WHERE O.organizationTypesId=2").getResultList();
+		
+		return orgs;
+	}
+
+	public void saveOrganization(Organization org) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Organization findOrganizationByID(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<OrganizationTypes> getAllOrganizationTypesByID(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void saveOrganization(AddOrganization org) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

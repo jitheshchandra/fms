@@ -1,0 +1,80 @@
+package com.ssrv.fms.vo.employee;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+public class EmployeeAttandenceForm {
+
+	private long organizationId;
+
+	private long branchId;
+
+	private long shiftId;
+
+	SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+
+	private Date attendanceDate;
+
+	private List<EmployeeAttendanceConfiguration> employees;
+
+	public long getOrganizationId() {
+		return organizationId;
+	}
+
+	public void setOrganizationId(long organizationId) {
+		this.organizationId = organizationId;
+	}
+
+	public long getBranchId() {
+		return branchId;
+	}
+
+	public void setBranchId(long branchId) {
+		this.branchId = branchId;
+	}
+
+	public long getShiftId() {
+		return shiftId;
+	}
+
+	public void setShiftId(long shiftId) {
+		this.shiftId = shiftId;
+	}
+
+	public List<EmployeeAttendanceConfiguration> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<EmployeeAttendanceConfiguration> employees) {
+		this.employees = employees;
+	}
+
+	public Date getAttendanceDate()
+		{
+			return attendanceDate;
+		}
+
+	public void setAttendanceDate(Date attendanceDate)
+		{
+			this.attendanceDate = attendanceDate;
+		}
+
+	
+	
+	
+
+//	public void setAttendanceDate(String attendanceDate) {
+//		if (attendanceDate != null) {
+//			try {
+//				this.attendanceDate = (Date) format.parse(attendanceDate);
+//			} catch (ParseException e) {
+//				// TODO: handle exception appropriately..
+//				e.printStackTrace();
+//			}
+//		} else {
+//			this.attendanceDate = null;
+//		}
+//	}
+
+}
