@@ -27,10 +27,26 @@ import com.ssrv.fms.service.employee.intf.EmployeeService;
 import com.ssrv.fms.service.organization.intf.OrganizationService;
 import com.ssrv.fms.vo.UserBranchMappingForm.UserBranchMappingForm;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+@Api(value="Admin Controller", description="Operations controlling Admin")
 @Controller
 @Path(AdminResource.ROOT_PATH)
 public class AdminController
 	{
+	
+	@ApiOperation(value = "View a list of available products",response = Iterable.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved list"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    }
+    )
+	
 		@GET
 		@Produces(MediaType.TEXT_HTML)
 		public ModelAndView sayIndex(ModelAndView model)
@@ -55,6 +71,7 @@ public class AdminController
 		
 		
 		//Get organization and branch by login user id
+		@ApiOperation(value = "View a list of available products")
 		@RequestMapping(value = "/ChangeBranch", method = RequestMethod.GET)
 		public String changeBranch(Model model,HttpServletRequest request, HttpServletResponse response)throws FmsException, NoSuchAlgorithmException
 			{

@@ -24,8 +24,13 @@ import com.ssrv.fms.model.user.UserBranchMapping;
 import com.ssrv.fms.service.admin.intf.LoginService;
 import com.ssrv.fms.vo.UserForm;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 //import com.ssrv.fms.model.Employee;
 
+@Api(value="Login", description="Operations pertaining to products in Online Store")
 @Controller
 public class LoginController
 	{
@@ -34,11 +39,23 @@ public class LoginController
 		private LoginService LoginServiceImpl;
 		HttpSession session = null;
 		// Spring Security see this :
+		
+		
+		
+		   @ApiOperation(value = "View a list of available products",response = Iterable.class)
+		    @ApiResponses(value = {
+		            @ApiResponse(code = 200, message = "Successfully retrieved list"),
+		            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+		            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+		            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+		    }
+		    )
 		@RequestMapping(value = "/login", method = RequestMethod.GET)
 		public String login()
 			{
 				return "login";
 			}
+		@ApiOperation(value = "Change Password")
 		@RequestMapping(value = "/ChangePassword", method = RequestMethod.GET)
 		public String changePassword(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws FmsException
 			{
@@ -49,7 +66,8 @@ public class LoginController
 					} else
 					{
 						try
-							{
+			
+						{
 								long userId = (Long) session.getAttribute("userId");
 								String oldPassword = LoginServiceImpl.getPassword(userId);
 								/*MessageDigest md = MessageDigest.getInstance("MD5");
@@ -75,7 +93,8 @@ public class LoginController
 					}
 				return "changePassword";
 			}
-
+		
+		@ApiOperation(value = "Update Password")
 		@RequestMapping(value = "/updatePassword", method = RequestMethod.GET)
 		public String updatePassword(ModelMap model, UserForm form) throws NoSuchAlgorithmException
 			{
@@ -96,13 +115,15 @@ public class LoginController
 				// myscript.RgisterStart
 				return "redirect:/Home";
 			}
-
+		
+		@ApiOperation(value = "Forgot Password")
 		@RequestMapping(value = "/ForgotPassword", method = RequestMethod.GET)
 		public String forgotPassword()
 			{
 				return "forgotPassword";
 			}
-
+		
+		@ApiOperation(value = "Verify login")
 		@RequestMapping(value = "/verifylogin", method = RequestMethod.POST)
 		public String verifylogin(UserForm form, BindingResult bindingResult, ModelMap model, HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException
@@ -147,6 +168,7 @@ public class LoginController
 						return "login";
 					}
 			}
+		@ApiOperation(value = "Back to HomePage")
 		@RequestMapping(value = "/Home", method = RequestMethod.GET)
 		public String home()
 			{

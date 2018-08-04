@@ -45,9 +45,14 @@ import com.ssrv.fms.vo.Asset.AssetTechnicalDetailsForm;
 import com.ssrv.fms.vo.Asset.AssetUseForm;
 import com.ssrv.fms.vo.Asset.AssetWarrantyForm;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(value="Asset management", description="Controller for asset mangement")
 @Controller
 public class AssetManagementController {
-
+	
+	@ApiOperation(value = "Operation for checking session")
 	public boolean checkForSession(HttpServletRequest req,
 			HttpServletResponse resp) {
 		HttpSession session = req.getSession(true);
@@ -64,6 +69,7 @@ public class AssetManagementController {
 	private AssetIntf assetImpl;
 
 	// Asset summary page
+	@ApiOperation(value = "Summary of Asset Management")
 	@RequestMapping(value = "/AssetManagementSummary", method = RequestMethod.GET)
 	public String assetManagementSummary(Model model, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -80,6 +86,7 @@ public class AssetManagementController {
 	}
 
 	// Get asset use
+	@ApiOperation(value = "Operation to get Asset summary")
 	@RequestMapping(value = "/getAssetSummary", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public @ResponseBody
@@ -89,6 +96,7 @@ public class AssetManagementController {
 	}
 
 	// Get asset
+	@ApiOperation(value = "Operation to get All Aseet")
 	@RequestMapping(value = "/getAllAsset", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public @ResponseBody
@@ -97,6 +105,7 @@ public class AssetManagementController {
 	}
 
 	// Save asset
+	@ApiOperation(value = "Opeartion to save Asset")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -108,6 +117,7 @@ public class AssetManagementController {
 	}
 
 	// Delete asset
+	@ApiOperation(value = "Operation to delete Asset")
 	@RequestMapping(value = "/deleteAseet", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public @ResponseBody
@@ -117,6 +127,7 @@ public class AssetManagementController {
 	}
 
 	// Edit asset
+	@ApiOperation(value = "Operation to edit Asset")
 	@RequestMapping(value = "/editAsset", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public @ResponseBody
@@ -126,6 +137,7 @@ public class AssetManagementController {
 	}
 
 	// Asset position
+	@ApiOperation(value = "Operation to delete Asset")
 	@RequestMapping(value = "/AssetManagementPosition", method = RequestMethod.GET)
 	public String assetPossition(Model model, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -140,7 +152,7 @@ public class AssetManagementController {
 			return "ErrorMsg";
 		}
 	}
-
+	@ApiOperation(value = "Operation to get Asset position")
 	@RequestMapping(value = "/getAssetPosition", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public @ResponseBody
@@ -148,6 +160,7 @@ public class AssetManagementController {
 		return assetImpl.getAssetPossiton();
 	}
 
+	@ApiOperation(value = "Operation to Update Asset position")
 	@RequestMapping(value = "/updateAssetPosition", method = {
 			RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody
@@ -158,6 +171,7 @@ public class AssetManagementController {
 	}
 
 	// Asset warranty
+	@ApiOperation(value = "Operation to get Asset Waranty")
 	@RequestMapping(value = "/AssetManagementWarranty", method = RequestMethod.GET)
 	public String assetWarranty(Model model, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -172,14 +186,14 @@ public class AssetManagementController {
 			return "ErrorMsg";
 		}
 	}
-
+	@ApiOperation(value = "Operation to get Asset Waranty List")
 	@RequestMapping(value = "/getAssetWarranty", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public @ResponseBody
 	List<AssetWarrantyForm> getAssetWarranty() {
 		return assetImpl.getAssetWarranty();
 	}
-
+	@ApiOperation(value = "Operation to update Aseet Waranty")
 	@RequestMapping(value = "/updateAssetTechnicalWarranty", method = {
 			RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody
@@ -190,6 +204,7 @@ public class AssetManagementController {
 	}
 
 	// Asset relation
+	@ApiOperation(value = "Operation to check Asset relation")
 	@RequestMapping(value = "/AssetManagementRelation", method = RequestMethod.GET)
 	public String assetRelation(Model model, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -206,6 +221,7 @@ public class AssetManagementController {
 	}
 
 	// Relation
+	@ApiOperation(value = "Operation to check relation")
 	@RequestMapping(value = "/RelationForm", method = RequestMethod.GET)
 	public String relation(Model model, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -222,6 +238,7 @@ public class AssetManagementController {
 	}
 
 	// Add Relation
+	@ApiOperation(value = "Operation to Add Relation")
 	@RequestMapping(value = "/AddRelation", method = RequestMethod.GET)
 	public String relationa(Model model, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -238,6 +255,7 @@ public class AssetManagementController {
 	}
 
 	// Get All relation***
+	@ApiOperation(value = "Operation to get Asset Relation")
 	@RequestMapping(value = "/getAssetRelation", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public @ResponseBody
@@ -246,6 +264,7 @@ public class AssetManagementController {
 	}
 
 	// /Save RelationType*****
+	@ApiOperation(value = "Operation to save Asset Relation")
 	@RequestMapping(value = "/saveRelation", method = RequestMethod.POST)
 	public String saveRelationtype(AssetRelationTypeForm form, ModelMap model) {
 		assetImpl.SaveAssetRelationType(form);
@@ -253,6 +272,7 @@ public class AssetManagementController {
 	}
 
 	// /Save Relation*****
+	@ApiOperation(value = "Operation to save Asset Relations")
 	@RequestMapping(value = "/saveRelations", method = RequestMethod.POST)
 	public String saveRelationt(AssetRelationForm form, ModelMap model) {
 		assetImpl.SaveAssetRelation(form);
@@ -260,6 +280,7 @@ public class AssetManagementController {
 	}
 
 	// Asset technical detail
+	@ApiOperation(value = "Operation to get Asset Management Technical Details")
 	@RequestMapping(value = "/AssetManagementTechnicalDetails", method = {
 			RequestMethod.GET, RequestMethod.POST })
 	public String assetTechnicalDetail(Model model, HttpServletRequest req,

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssrv.fms.dao.schedule.intf.ScheduleService;
+//import com.ssrv.fms.dao.schedule.intf.ScheduleService;
 import com.ssrv.fms.model.employee.Employees;
 import com.ssrv.fms.model.organization.Organization;
 import com.ssrv.fms.service.branch.intf.BranchService;
@@ -26,8 +26,8 @@ import com.ssrv.fms.vo.schedule.ScheduleVO;
 @Controller
 public class ScheduleController {
 	
-	@Autowired
-    private ScheduleService scheduleServiceImpl;
+	//@Autowired
+    //private ScheduleService scheduleServiceImpl;
 	
 	@Autowired
 	private OrganizationService organizationServiceImpl;
